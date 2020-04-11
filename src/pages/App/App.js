@@ -1,8 +1,28 @@
 import React, { Component } from "react";
 import { Route, NavLink } from "react-router-dom";
 import "./App.css";
+import SignupPage from "../SignupPage/SignupPage";
+import LoginPage from "../LoginPage/LoginPage";
+import userService from "../../services/userService";
+import NavBar from "../../components/SignupForm/NavBar/NavBar";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: userService.getUser(),
+    };
+  }
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({ user: null });
+  };
+
+  handleSignupOrLogin = () => {
+    this.setState({ user: userService.getUser() });
+  };
+
   render() {
     return (
       <div className="App">
@@ -11,15 +31,29 @@ class App extends Component {
             <NavLink className="App-nav-title" exact to="/">
               BeerNear
             </NavLink>
-            <NavLink className="App-nav" exact to="/signup">
-              Signup
-            </NavLink>
-            <NavLink className="App-nav" exact to="/login">
-              Login
-            </NavLink>
-            <NavLink className="App-nav" exact to="/fridge">
-              My Fridge
-            </NavLink>
+            <Route
+              exact
+              path="/signup"
+              render={({ history }) => (
+                <SignupPage
+                  history={history}
+                  className="App-nav"
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/login"
+              render={({ history }) => (
+                <LoginPage
+                  history={history}
+                  className="App-nav"
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              )}
+            />
+            <NavBar />
           </nav>
         </header>
       </div>
