@@ -5,12 +5,16 @@ import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
 import NavBar from "../../components/SignupForm/NavBar/NavBar";
+import { getCurrentLatLng } from "../../services/geolocation";
+import BeerSearch from "../../components/BeerSearch/BeerSearch";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
+      lat: null,
+      lng: null,
     };
   }
 
@@ -22,6 +26,15 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() });
   };
+
+  async componentDidMount() {
+    // Destructure the object returned from getCurrentLatLng()
+    const { lat, lng } = await getCurrentLatLng();
+    this.setState({
+      lat,
+      lng,
+    });
+  }
 
   render() {
     return (
@@ -56,6 +69,7 @@ class App extends Component {
             <NavBar user={this.state.user} handleLogout={this.handleLogout} />
           </nav>
         </header>
+        <BeerSearch />
       </div>
     );
   }

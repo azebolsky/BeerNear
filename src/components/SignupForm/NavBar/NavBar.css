@@ -1,4 +1,7 @@
 .NavBar-link {
   color: wheat;
   text-decoration: none;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
