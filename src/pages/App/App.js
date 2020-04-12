@@ -53,7 +53,7 @@ class App extends Component {
                 />
               )}
             />
-            <NavBar />
+            <NavBar user={this.state.user} handleLogout={this.handleLogout} />
           </nav>
         </header>
       </div>
