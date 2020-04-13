@@ -10,6 +10,7 @@ const NavBar = (props) => {
       </Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
+      <Link to="/fridge">My Fridge</Link>
     </div>
   ) : (
     <div className="NavBar-link">

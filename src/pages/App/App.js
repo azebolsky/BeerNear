@@ -4,9 +4,10 @@ import "./App.css";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
-import NavBar from "../../components/SignupForm/NavBar/NavBar";
-import { getCurrentLatLng } from "../../services/geolocation";
+import NavBar from "../../components/NavBar/NavBar";
+// import { getCurrentLatLng } from "../../services/geolocation";
 import BeerSearch from "../../components/BeerSearch/BeerSearch";
+import { getAllBeers } from "../../services/api-service";
 
 class App extends Component {
   constructor() {
@@ -15,6 +16,7 @@ class App extends Component {
       user: userService.getUser(),
       lat: null,
       lng: null,
+      beers: [],
     };
   }
 
@@ -28,12 +30,13 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    // Destructure the object returned from getCurrentLatLng()
-    const { lat, lng } = await getCurrentLatLng();
-    this.setState({
-      lat,
-      lng,
-    });
+    try {
+      const response = await getAllBeers();
+      const { data } = JSON.parse(response);
+      console.log(data[0].name);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -69,7 +72,9 @@ class App extends Component {
             <NavBar user={this.state.user} handleLogout={this.handleLogout} />
           </nav>
         </header>
-        <BeerSearch />
+        <Route exact path="/">
+          <BeerSearch />
+        </Route>
       </div>
     );
   }
