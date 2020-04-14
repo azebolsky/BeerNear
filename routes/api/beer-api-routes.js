@@ -13,4 +13,13 @@ router.get("/", function (req, res) {
   });
 });
 
+// router.get("/", function (req, res) {
+//   request(
+//     `https://api.brewerydb.com/v2/beer/${beerId}/?key=` + API_KEY,
+//     function (error, response, body) {
+//       res.json(body);
+//     }
+//   );
+// });
+
 module.exports = router;

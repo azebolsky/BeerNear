@@ -6,9 +6,8 @@ import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
 import NavBar from "../../components/NavBar/NavBar";
 import { getCurrentLatLng } from "../../services/geolocation";
-import BeerSearch from "../../components/BeerSearch/BeerSearch";
+import BeerSearchBar from "../../components/BeerSearchBar/BeerSearchBar";
 import { getAllBeers } from "../../services/api-service";
-import BeerListPage from "../../components/BeerListPage/BeerListPage";
 import FridgePage from "../FridgePage/FridgePage";
 
 class App extends Component {
@@ -19,6 +18,7 @@ class App extends Component {
       lat: null,
       lng: null,
       beers: [],
+      searchBeerResults: [],
     };
   }
 
@@ -35,15 +35,26 @@ class App extends Component {
     try {
       const { lat, lng } = await getCurrentLatLng();
       const response = await getAllBeers();
-      const data = JSON.parse(response);
+      const { data } = JSON.parse(response);
       this.setState({
         lat,
         lng,
         beers: data,
       });
-    } catch (error) {}
-    console.log(this.state.beers.data[0].name);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  getBeerResults = async (request) => {
+    try {
+      const results = await request.json();
+      console.log(results[0]);
+      this.setState({ searchBeerResults: [...results.data.items] });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   render() {
     return (
@@ -79,12 +90,12 @@ class App extends Component {
           </nav>
         </header>
         <Route exact path="/">
-          <BeerSearch {...this.state.beers} />
+          <BeerSearchBar
+            getBeerResults={this.getBeerResults}
+            beers={this.state.beers}
+            searchBeerResults={this.state.searchBeerResults}
+          />
         </Route>
-        <Route>
-          <BeerListPage {...this.state.beers} />
-        </Route>
-        {/* <li>{this.state.beers.data[0].name}</li> */}
         <Route exact path="/fridge">
           <FridgePage />
         </Route>
