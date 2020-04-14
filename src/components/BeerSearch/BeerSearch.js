@@ -13,6 +13,14 @@ class BeerSearch extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
+    // let caseName = this.state.formData.beerName.toLowerCase();
+    // let beers = this.props;
+    for (const beer in this.props) {
+      console.log(this.props[beer]);
+      // if (this.props[beer].style.name.toLowerCase().includes(caseName)) {
+      //   console.log(`match: ${this.props[0].style.name}`);
+      // }
+    }
   };
 
   handleChange = (evt) => {
@@ -20,6 +28,7 @@ class BeerSearch extends Component {
       ...this.state.formData,
       [evt.target.name]: evt.target.value,
     };
+    // console.log(this.props[0].style.name);
     this.setState({
       formData,
       invalidForm: !this.formRef.current.checkValidity(),

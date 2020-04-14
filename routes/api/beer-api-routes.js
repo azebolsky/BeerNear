@@ -10,8 +10,6 @@ router.get("/", function (req, res) {
     body
   ) {
     res.json(body);
-    console.log("response", response);
-    console.log(error);
   });
 });
 
