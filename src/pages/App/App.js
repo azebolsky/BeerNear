@@ -19,6 +19,7 @@ class App extends Component {
       lng: null,
       beers: [],
       searchBeerResults: [],
+      loading: true,
     };
   }
 
@@ -40,23 +41,31 @@ class App extends Component {
         lat,
         lng,
         beers: data,
+        loading: false,
       });
     } catch (error) {
       console.log(error);
     }
   }
 
-  getBeerResults = async (request) => {
+  getBeerResults = async (beerName) => {
     try {
-      const results = await request.json();
-      console.log(results[0]);
-      this.setState({ searchBeerResults: [...results.data.items] });
+      let beerArray = [];
+      await this.state.beers.filter((beer) => {
+        if (beer.name.toLowerCase().includes(beerName.toLowerCase())) {
+          beerArray.push(beer.name);
+        }
+      });
+      this.setState({ searchBeerResults: [...beerArray] });
     } catch (error) {
       console.log(error);
     }
   };
 
   render() {
+    if (!this.state.loading) {
+      return <p>loading...</p>;
+    }
     return (
       <div className="App">
         <header className="App-header">

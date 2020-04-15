@@ -55,9 +55,8 @@ class BeerSearchBar extends Component {
           </Grid.Column>
         </Grid>
         <BeerSearchResults
-          beerSearchResults={this.props.beerSearchResults}
+          searchBeerResults={this.props.searchBeerResults}
           beers={this.props.beers}
-          beerName={this.state.formData.beerName}
         />
       </>
     );
