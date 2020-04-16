@@ -1,13 +1,14 @@
 import React from "react";
 import { Card, Icon, Image } from "semantic-ui-react";
+import Pagination from "../Pagination/Pagination";
 import "./BeerSearchResults.css";
 
 const BeerSearchResults = (props) => {
   const beerList = props.searchBeerResults.map((beer, idx) => {
-    console.log(props.beers[0].name);
+    console.log(beer);
     return (
       <Card.Group>
-        <Card key={idx} className="ui centered card" style={{ width: "800px" }}>
+        <Card className="ui centered card" style={{ width: "800px" }}>
           <Card.Content>
             <Image
               floated="left"
@@ -29,7 +30,10 @@ const BeerSearchResults = (props) => {
           <Card.Content extra>
             <div className="ui one button">
               <Icon name="beer" color="green" size="large">
-                <button color="green"></button>
+                <button
+                  onClick={() => props.handleFavAddButtonClick()}
+                  color="green"
+                ></button>
               </Icon>
             </div>
           </Card.Content>
@@ -37,7 +41,12 @@ const BeerSearchResults = (props) => {
       </Card.Group>
     );
   });
-  return <div>{beerList} -</div>;
+  return (
+    <div>
+      {beerList}
+      <Pagination numberOfPages={props.numberOfPages} />
+    </div>
+  );
 };
 
 export default BeerSearchResults;

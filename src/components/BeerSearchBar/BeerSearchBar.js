@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Grid, Segment } from "semantic-ui-react";
 import BeerSearchResults from "../BeerSearchResults/BeerSearchResults";
+import Pagination from "../Pagination/Pagination";
 
 class BeerSearchBar extends Component {
   constructor() {
@@ -20,6 +21,11 @@ class BeerSearchBar extends Component {
     this.props.getBeerResults(this.state.formData.beerName);
   };
 
+  // handleAllSubmit = (evt) => {
+  //   evt.preventDefault();
+  //   this.props.getAllBeerResults();
+  // };
+  "";
   handleChange = (evt) => {
     const formData = {
       ...this.state.formData,
@@ -47,16 +53,22 @@ class BeerSearchBar extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Input>
-                <button type="submit" disabled={this.state.invalidForm}>
-                  Search
-                </button>
+                <button type="submit">Search</button>
               </form>
+              <button onSubmit={this.handleAllSubmit}>View All Beers</button>
             </Segment>
           </Grid.Column>
         </Grid>
         <BeerSearchResults
           searchBeerResults={this.props.searchBeerResults}
           beers={this.props.beers}
+          handleFavAddButtonClick={this.props.handleFavAddButtonClick}
+        />
+        <Pagination
+          beersPerPage={this.props.beersPerPage}
+          numberOfPages={this.props.numberOfPages}
+          currentPage={this.props.currentPage}
+          handlePageClick={this.props.handlePageClick}
         />
       </>
     );

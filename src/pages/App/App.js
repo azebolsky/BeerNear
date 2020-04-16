@@ -19,7 +19,10 @@ class App extends Component {
       lng: null,
       beers: [],
       searchBeerResults: [],
-      loading: true,
+      showAllBeers: [],
+      numberOfPages: 0,
+      currentPage: 0,
+      favBeers: [],
     };
   }
 
@@ -36,12 +39,13 @@ class App extends Component {
     try {
       const { lat, lng } = await getCurrentLatLng();
       const response = await getAllBeers();
-      const { data } = JSON.parse(response);
+      const { data, numberOfPages, currentPage } = JSON.parse(response);
       this.setState({
         lat,
         lng,
         beers: data,
-        loading: false,
+        numberOfPages,
+        currentPage,
       });
     } catch (error) {
       console.log(error);
@@ -62,10 +66,29 @@ class App extends Component {
     }
   };
 
-  render() {
-    if (!this.state.loading) {
-      return <p>loading...</p>;
+  getAllBeerResults = async () => {
+    try {
+      await this.setState({ showAllBeers: [...this.state.beers] });
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  handlePageClick = async () => {
+    const response = await getAllBeers(this.state.currentPage + 1);
+    const { data, numberOfPages, currentPage } = JSON.parse(response);
+    this.setState({
+      currentPage: currentPage,
+      beers: data,
+      numberOfPages,
+    });
+  };
+
+  handleFavAddButtonClick = () => {
+    console.log("I have been clicked!!!!!");
+  };
+
+  render() {
     return (
       <div className="App">
         <header className="App-header">
@@ -101,12 +124,17 @@ class App extends Component {
         <Route exact path="/">
           <BeerSearchBar
             getBeerResults={this.getBeerResults}
+            getAllBeerResults={this.getAllBeerResults}
             beers={this.state.beers}
             searchBeerResults={this.state.searchBeerResults}
+            numberOfPages={this.state.numberOfPages}
+            currentPage={this.state.currentPage}
+            handlePageClick={this.handlePageClick}
+            handleFavAddButtonClick={this.handleFavAddButtonClick}
           />
         </Route>
         <Route exact path="/fridge">
-          <FridgePage />
+          <FridgePage favBeers={this.state.favBeers} />
         </Route>
       </div>
     );
