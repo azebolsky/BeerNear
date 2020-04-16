@@ -5,7 +5,6 @@ import "./BeerSearchResults.css";
 
 const BeerSearchResults = (props) => {
   const beerList = props.searchBeerResults.map((beer, idx) => {
-    console.log(beer);
     return (
       <Card.Group>
         <Card className="ui centered card" style={{ width: "800px" }}>

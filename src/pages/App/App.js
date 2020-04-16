@@ -19,7 +19,6 @@ class App extends Component {
       lng: null,
       beers: [],
       searchBeerResults: [],
-      showAllBeers: [],
       numberOfPages: 0,
       currentPage: 0,
       favBeers: [],
@@ -66,21 +65,24 @@ class App extends Component {
     }
   };
 
-  getAllBeerResults = async () => {
-    try {
-      await this.setState({ showAllBeers: [...this.state.beers] });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   handlePageClick = async () => {
     const response = await getAllBeers(this.state.currentPage + 1);
     const { data, numberOfPages, currentPage } = JSON.parse(response);
+    console.log(data);
     this.setState({
       currentPage: currentPage,
       beers: data,
       numberOfPages,
+      // searchBeerResults: [...data],
+    });
+    console.log(data);
+    console.log(this.state.searchBeerResults);
+    let beerArray = [];
+    this.state.beers.map((beer) => {
+      beerArray.push(beer.name);
+    });
+    this.setState({
+      searchBeerResults: beerArray,
     });
   };
 

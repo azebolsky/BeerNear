@@ -21,11 +21,6 @@ class BeerSearchBar extends Component {
     this.props.getBeerResults(this.state.formData.beerName);
   };
 
-  // handleAllSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   this.props.getAllBeerResults();
-  // };
-  "";
   handleChange = (evt) => {
     const formData = {
       ...this.state.formData,
@@ -55,7 +50,6 @@ class BeerSearchBar extends Component {
                 </Form.Input>
                 <button type="submit">Search</button>
               </form>
-              <button onSubmit={this.handleAllSubmit}>View All Beers</button>
             </Segment>
           </Grid.Column>
         </Grid>
