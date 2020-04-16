@@ -48,7 +48,7 @@ class BeerSearchBar extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Input>
-                <button type="submit">Search</button>
+                <button type="submit">Click to View All Beers or Search</button>
               </form>
             </Segment>
           </Grid.Column>

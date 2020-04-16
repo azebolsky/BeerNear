@@ -20,7 +20,8 @@ const beerSchema = new Schema(
       required: true,
     },
     favoritedBy: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {

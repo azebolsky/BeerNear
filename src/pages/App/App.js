@@ -9,6 +9,7 @@ import { getCurrentLatLng } from "../../services/geolocation";
 import BeerSearchBar from "../../components/BeerSearchBar/BeerSearchBar";
 import { getAllBeers } from "../../services/api-service";
 import FridgePage from "../FridgePage/FridgePage";
+import * as beerAPI from "../../services/api-service";
 
 class App extends Component {
   constructor() {
@@ -68,15 +69,11 @@ class App extends Component {
   handlePageClick = async () => {
     const response = await getAllBeers(this.state.currentPage + 1);
     const { data, numberOfPages, currentPage } = JSON.parse(response);
-    console.log(data);
     this.setState({
       currentPage: currentPage,
       beers: data,
       numberOfPages,
-      // searchBeerResults: [...data],
     });
-    console.log(data);
-    console.log(this.state.searchBeerResults);
     let beerArray = [];
     this.state.beers.map((beer) => {
       beerArray.push(beer.name);
@@ -84,10 +81,18 @@ class App extends Component {
     this.setState({
       searchBeerResults: beerArray,
     });
+    window.scrollTo(0, 0);
   };
 
-  handleFavAddButtonClick = () => {
+  handleFavAddButtonClick = async (newBeerData) => {
     console.log("I have been clicked!!!!!");
+    const newBeer = await beerAPI.create(newBeerData);
+    this.setState(
+      (state) => ({
+        favBeers: [...this.state.favBeers, newBeer],
+      }),
+      () => this.props.history.push("/fridge")
+    );
   };
 
   render() {
