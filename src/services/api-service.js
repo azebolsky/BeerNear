@@ -1,13 +1,18 @@
+import tokenService from "./tokenService";
 const BASE_URL = "/api/beers";
 
 export function getAllBeers(page) {
   return fetch(BASE_URL + "/?page=" + page).then((res) => res.json());
 }
 
-export function create(beer) {
+export function addFavorite(beer) {
+  console.log(JSON.stringify(beer));
   return fetch(BASE_URL, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + tokenService.getToken(),
+    },
     body: JSON.stringify(beer),
   }).then((res) => res.json());
 }

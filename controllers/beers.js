@@ -1,19 +1,20 @@
 const Beer = require("../models/beer");
 
 module.exports = {
-  create,
+  addFavorite,
   index,
   delete: deleteOne,
 };
 
-async function create(req, res) {
-  const user = await User.findById(req.user._id);
-  req.body.name = req.user.name;
-  user.beers.favoritedBy.push(req.body);
-  user.save(function (err) {
-    res.status(201).json(beer);
+async function addFavorite(req, res) {
+  try {
+    const beer = await Beer.create(req.body);
+    beer.favoritedBy.push(req.user._id);
+    await beer.save();
+    res.json(beer);
+  } catch (err) {
     res.status(500).json(err);
-  });
+  }
 }
 
 async function index(req, res) {

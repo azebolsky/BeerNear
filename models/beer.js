@@ -11,18 +11,16 @@ const beerSchema = new Schema(
       type: Number,
       required: true,
     },
-    brewery: {
-      type: String,
-      required: true,
-    },
     beerId: {
       type: String,
       required: true,
     },
-    favoritedBy: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+    favoritedBy: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,

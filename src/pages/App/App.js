@@ -5,7 +5,6 @@ import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
 import NavBar from "../../components/NavBar/NavBar";
-import { getCurrentLatLng } from "../../services/geolocation";
 import BeerSearchBar from "../../components/BeerSearchBar/BeerSearchBar";
 import { getAllBeers } from "../../services/api-service";
 import FridgePage from "../FridgePage/FridgePage";
@@ -16,8 +15,6 @@ class App extends Component {
     super();
     this.state = {
       user: userService.getUser(),
-      lat: null,
-      lng: null,
       beers: [],
       searchBeerResults: [],
       numberOfPages: 0,
@@ -37,12 +34,9 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const { lat, lng } = await getCurrentLatLng();
       const response = await getAllBeers();
       const { data, numberOfPages, currentPage } = JSON.parse(response);
       this.setState({
-        lat,
-        lng,
         beers: data,
         numberOfPages,
         currentPage,
@@ -85,11 +79,12 @@ class App extends Component {
   };
 
   handleFavAddButtonClick = async (newBeerData) => {
-    console.log("I have been clicked!!!!!");
-    const newBeer = await beerAPI.create(newBeerData);
+    console.log(newBeerData.id);
+    const response = await beerAPI.addFavorite(newBeerData.id);
+    const { data } = JSON.parse(response);
     this.setState(
-      (state) => ({
-        favBeers: [...this.state.favBeers, newBeer],
+      () => ({
+        favBeers: data,
       }),
       () => this.props.history.push("/fridge")
     );

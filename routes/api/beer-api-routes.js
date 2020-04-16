@@ -13,4 +13,15 @@ router.get("/", function (req, res) {
   );
 });
 
+router.post("/fridge", function (req, res) {
+  const beerId = req.query.id;
+  console.log(beerId);
+  request(
+    `https://api.brewerydb.com/v2/beer/${beerId}/?key=${API_KEY}`,
+    function (error, response, body) {
+      res.json(body);
+    }
+  );
+});
+
 module.exports = router;

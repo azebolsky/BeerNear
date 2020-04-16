@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use("/api/users", require("./routes/api/users"));
 app.use(require("./config/auth"));
 app.use("/api/beers", require("./routes/api/beer-api-routes"));
-app.use("/api/beer/beerId", require("./routes/api/beer-api-routes"));
+app.use("/api/fridge", require("./routes/api/beer-api-routes"));
 
 // "catch all" route
 app.get("/*", function (req, res) {
