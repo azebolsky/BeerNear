@@ -19,18 +19,22 @@ async function addFavorite(req, res) {
 
 async function deleteFavorite(req, res) {
   try {
+    console.log(req.params.id)
     const beer = await Beer.findById(req.params.id);
     beer.favoritedBy.remove(req.user._id);
     await beer.save();
+    console.log('beer: ', beer);
     allFavorites(req, res);
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 }
 
 async function allFavorites(req, res) {
   try {
     const favorites = await Beer.find({ favoritedBy: { '$in': req.user._id } });
+    console.log('fav: ', favorites);
     res.json(favorites);
   } catch (err) {
     res.status(500).json(err);

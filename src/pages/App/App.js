@@ -94,7 +94,7 @@ class App extends Component {
       () => ({
         favBeers: this.state.favBeers.filter((b) => b.beerId !== id)
       }),
-      () => this.props.history.push("/")
+      () => this.props.history.push("/fridge")
     );
   }
 

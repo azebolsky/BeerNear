@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from 'semantic-ui-react'
 
 const FridgeList = ({ beer, handleDeleteFavorite }) => {
-    console.log(beer)
     return (
         <div>
             <Card>
