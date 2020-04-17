@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
+import { Route, Redirect, NavLink, withRouter } from "react-router-dom";
 import "./App.css";
 import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
@@ -46,14 +46,12 @@ class App extends Component {
     }
   }
 
+
   getBeerResults = async (beerName) => {
     try {
       let beerArray = [];
-      await this.state.beers.filter((beer) => {
-        if (beer.name.toLowerCase().includes(beerName.toLowerCase())) {
-          beerArray.push(beer.name);
-        }
-      });
+      await this.state.beers.filter((beer) => (
+        beer.name.toLowerCase().includes(beerName.toLowerCase())) ? beerArray.push(beer.name) : "");
       this.setState({ searchBeerResults: [...beerArray] });
     } catch (error) {
       console.log(error);
@@ -69,9 +67,9 @@ class App extends Component {
       numberOfPages,
     });
     let beerArray = [];
-    this.state.beers.map((beer) => {
-      beerArray.push(beer.name);
-    });
+    this.state.beers.map((beer) =>
+      beerArray.push(beer.name)
+    );
     this.setState({
       searchBeerResults: beerArray,
     });
@@ -79,16 +77,26 @@ class App extends Component {
   };
 
   handleFavAddButtonClick = async (newBeerData) => {
-    console.log(newBeerData.id);
-    const response = await beerAPI.addFavorite(newBeerData.id);
-    const { data } = JSON.parse(response);
+    const response = await beerAPI.addFavorite(newBeerData);
+    const favBeersCopy = [...this.state.favBeers, response]
     this.setState(
       () => ({
-        favBeers: data,
+        favBeers: favBeersCopy,
       }),
-      () => this.props.history.push("/fridge")
+      () => this.props.history.push("/")
     );
   };
+
+  handleDeleteFavorite = async (id) => {
+    console.log(id)
+    const response = await beerAPI.deleteFavorite(id);
+    this.setState(
+      () => ({
+        favBeers: this.state.favBeers.filter((b) => b.beerId !== id)
+      }),
+      () => this.props.history.push("/")
+    );
+  }
 
   render() {
     return (
@@ -133,14 +141,21 @@ class App extends Component {
             currentPage={this.state.currentPage}
             handlePageClick={this.handlePageClick}
             handleFavAddButtonClick={this.handleFavAddButtonClick}
+            favBeers={this.state.favBeers}
           />
         </Route>
-        <Route exact path="/fridge">
-          <FridgePage favBeers={this.state.favBeers} />
-        </Route>
+        <Route exact path="/fridge" render={() =>
+          userService.getUser() ?
+            <FridgePage
+              favBeers={this.state.favBeers}
+              handleDeleteFavorite={this.handleDeleteFavorite}
+            />
+            :
+            <Redirect to="/login" />
+        } />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

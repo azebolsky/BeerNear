@@ -6,9 +6,9 @@ const beersCtrl = require("../../controllers/beers");
 // Process the token for only the routes below
 // will check to see if req.user is defined. if true, it will send to controllers below
 router.use(require("../../config/auth"));
-router.post("/fridge", checkAuth, beersCtrl.addFavorite);
-router.get("/", beersCtrl.index);
-router.get("/:id", beersCtrl.delete);
+router.post("/", checkAuth, beersCtrl.addFavorite);
+router.delete("/:id", checkAuth, beersCtrl.delete);
+router.get("/", checkAuth, beersCtrl.allFavorites);
 
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {

@@ -6,7 +6,7 @@ import "./BeerSearchResults.css";
 const BeerSearchResults = (props) => {
   const beerList = props.searchBeerResults.map((beer, idx) => {
     return (
-      <Card.Group>
+      <Card.Group key={props.beers[idx].id}>
         <Card className="ui centered card" style={{ width: "800px" }}>
           <Card.Content>
             <Image
@@ -28,14 +28,38 @@ const BeerSearchResults = (props) => {
           </Card.Content>
           <Card.Content extra>
             <div>
-              <Button
-                onClick={() => props.handleFavAddButtonClick(props.beers[idx])}
-                icon
-                labelPosition="left"
-              >
-                <Icon name="beer" color="green" />
-                Add to Fridge
+              {props.favBeers.length ? props.favBeers.forEach((brew) => (
+                props.beers[idx].id === brew.beerId ? "beer already added" :
+                  <Button
+                    onClick={() => props.handleFavAddButtonClick({
+                      name: props.beers[idx].name,
+                      abv: props.beers[idx].abv,
+                      beerId: props.beers[idx].id,
+                      icon: props.beers[idx].labels ? props.beers[idx].labels.icon : "https://i.imgur.com/DYjJL5I.png"
+                    })}
+                    icon
+                    labelPosition="left"
+                  >
+                    <Icon name="beer" color="green" />
+                    Add to Fridge
               </Button>
+              ))
+                :
+                <Button
+                  onClick={() => props.handleFavAddButtonClick({
+                    name: props.beers[idx].name,
+                    abv: props.beers[idx].abv,
+                    beerId: props.beers[idx].id,
+                    icon: props.beers[idx].labels ? props.beers[idx].labels.icon : "https://i.imgur.com/DYjJL5I.png"
+                  })}
+                  icon
+                  labelPosition="left"
+                >
+                  <Icon name="beer" color="green" />
+                  Add to Fridge
+              </Button>
+              }
+
             </div>
           </Card.Content>
         </Card>

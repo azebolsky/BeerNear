@@ -2,8 +2,8 @@ const Beer = require("../models/beer");
 
 module.exports = {
   addFavorite,
-  index,
-  delete: deleteOne,
+  delete: deleteFavorite,
+  allFavorites
 };
 
 async function addFavorite(req, res) {
@@ -17,17 +17,22 @@ async function addFavorite(req, res) {
   }
 }
 
-async function index(req, res) {
-  const user = await User.findById(req.user._id);
-  const beers = await Beer.favoritedBy.user._id.find({});
-  res.status(200).json(beers);
+async function deleteFavorite(req, res) {
+  try {
+    const beer = await Beer.findById(req.params.id);
+    beer.favoritedBy.remove(req.user._id);
+    await beer.save();
+    allFavorites(req, res);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
 
-async function deleteOne(req, res) {
-  const user = await User.findById(req.user._id);
-  const deletedBeer = await Beer.findByIdAndRemove(req.params.id);
-  user.save(function (err) {
-    res.status(200).json(deletedBeer);
+async function allFavorites(req, res) {
+  try {
+    const favorites = await Beer.find({ favoritedBy: { '$in': req.user._id } });
+    res.json(favorites);
+  } catch (err) {
     res.status(500).json(err);
-  });
+  }
 }

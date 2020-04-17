@@ -5,9 +5,17 @@ export function getAllBeers(page) {
   return fetch(BASE_URL + "/?page=" + page).then((res) => res.json());
 }
 
+export function allFavorites() {
+  return fetch(BASE_URL + "/favorites", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + tokenService.getToken()
+    },
+  }).then((res) => res.json());
+}
+
 export function addFavorite(beer) {
-  console.log(JSON.stringify(beer));
-  return fetch(BASE_URL, {
+  return fetch(BASE_URL + '/favorites', {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -17,8 +25,13 @@ export function addFavorite(beer) {
   }).then((res) => res.json());
 }
 
-export function deleteOne(id) {
-  return fetch(BASE_URL + id, {
+export function deleteFavorite(favBeerId) {
+  return fetch(BASE_URL + '/favorites/' + favBeerId, {
     method: "DELETE",
+    headers: {
+      "Authorization": "Bearer " + tokenService.getToken(),
+    },
   }).then((res) => res.json());
 }
+
+

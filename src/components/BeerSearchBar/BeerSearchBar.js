@@ -6,6 +6,7 @@ import Pagination from "../Pagination/Pagination";
 class BeerSearchBar extends Component {
   constructor() {
     super();
+    this.wrapper = React.createRef();
     this.state = {
       invalidForm: true,
       formData: {
@@ -34,7 +35,7 @@ class BeerSearchBar extends Component {
 
   render() {
     return (
-      <>
+      <div ref={this.wrapper}>
         <Grid className="center aligned">
           <Grid.Column>
             <Segment>
@@ -57,14 +58,17 @@ class BeerSearchBar extends Component {
           searchBeerResults={this.props.searchBeerResults}
           beers={this.props.beers}
           handleFavAddButtonClick={this.props.handleFavAddButtonClick}
+          favBeers={this.props.favBeers}
+          handleDeleteFavorite={this.props.handleDeleteFavorite}
         />
         <Pagination
-          beersPerPage={this.props.beersPerPage}
           numberOfPages={this.props.numberOfPages}
           currentPage={this.props.currentPage}
           handlePageClick={this.props.handlePageClick}
+          loading={this.props.loading}
+          searchBeerResults={this.props.searchBeerResults}
         />
-      </>
+      </div>
     );
   }
 }

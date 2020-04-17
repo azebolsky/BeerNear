@@ -1,18 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
+import FridgeList from '../../components/FridgeList/FridgeList'
 import "./FridgePage.css";
 
-class FridgePage extends Component {
-  render() {
-    return (
-      <div className="Fridge-Page">
-        <img
-          src="https://i.imgur.com/qCtNL8a.jpg"
-          width="1500px"
-          alt="fridge"
+const FridgePage = (props) => {
+  return (
+    <div className="Fridge-Page">
+      {props.favBeers.map((beer, idx) => (
+        <FridgeList
+          key={idx}
+          favBeers={props.favBeers}
+          beer={beer}
+          handleDeleteFavorite={props.handleDeleteFavorite}
         />
-      </div>
-    );
-  }
+      ))}
+    </div>
+  )
 }
 
 export default FridgePage;

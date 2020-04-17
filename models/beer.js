@@ -15,6 +15,9 @@ const beerSchema = new Schema(
       type: String,
       required: true,
     },
+    icon: {
+      type: String,
+    },
     favoritedBy: [
       {
         type: Schema.Types.ObjectId,

@@ -1,17 +1,25 @@
 import React from "react";
 import "./Pagination.css";
 
-const Pagination = ({ numberOfPages, currentPage, handlePageClick }) => {
+const Pagination = ({ numberOfPages, currentPage, handlePageClick, searchBeerResults }) => {
   return (
     <div className="Pagination-Style">
-      {currentPage} of {numberOfPages}
-      <div>
-        <button onClick={handlePageClick}>
-          {currentPage <= numberOfPages
-            ? `Page ${currentPage + 1}`
-            : numberOfPages - (numberOfPages - 1)}
-        </button>
-      </div>
+      {!numberOfPages ? "" :
+        <>
+          <div>
+            {searchBeerResults < 23 ? "" :
+              <>
+                <p>{currentPage} of {numberOfPages}</p>
+                <button onClick={handlePageClick}>
+                  {currentPage <= numberOfPages
+                    ? `Page ${currentPage + 1}`
+                    : numberOfPages - (numberOfPages - 1)}
+                </button>
+              </>
+            }
+          </div>
+        </>
+      }
     </div>
   );
 };
