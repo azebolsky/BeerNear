@@ -15,7 +15,7 @@ const FridgeList = ({ beer, handleDeleteFavorite }) => {
                     <Card.Header>{beer.name}</Card.Header>
                     <Card.Description>ABV-{beer.abv}%</Card.Description>
                     <button
-                        onClick={() => handleDeleteFavorite(beer.beerId)}
+                        onClick={() => handleDeleteFavorite({ id: beer._id, beerId: beer.beerId })}
                     >
                         Delete
                     </button>

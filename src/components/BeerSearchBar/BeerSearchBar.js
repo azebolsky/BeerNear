@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Grid, Segment } from "semantic-ui-react";
 import BeerSearchResults from "../BeerSearchResults/BeerSearchResults";
 import Pagination from "../Pagination/Pagination";
+import './BeerSearchBar.css';
 
 class BeerSearchBar extends Component {
   constructor() {
@@ -35,10 +36,10 @@ class BeerSearchBar extends Component {
 
   render() {
     return (
-      <div ref={this.wrapper}>
+      <div ref={this.wrapper} className="Search-Container">
         <Grid className="center aligned">
           <Grid.Column>
-            <Segment>
+            <Segment className="SearchSegment">
               <h1>Search Beer Here</h1>
               <form ref={this.formRef} onSubmit={this.handleSubmit}>
                 <Form.Input>

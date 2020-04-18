@@ -2,3 +2,12 @@
   display: flex;
   justify-content: center;
 }
+
+.Search-Container grid {
+  background-color: red;
+}
+
+Segment {
+  /* background: url("https://i.imgur.com/n5o3zb9.jpg"); */
+  background-color: red;
+}

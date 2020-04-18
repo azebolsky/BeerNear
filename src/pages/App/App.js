@@ -6,9 +6,9 @@ import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
 import NavBar from "../../components/NavBar/NavBar";
 import BeerSearchBar from "../../components/BeerSearchBar/BeerSearchBar";
-import { getAllBeers } from "../../services/api-service";
+import { getAllBeers } from "../../services/apiService";
 import FridgePage from "../FridgePage/FridgePage";
-import * as beerAPI from "../../services/api-service";
+import * as beerAPI from "../../services/apiService";
 
 class App extends Component {
   constructor() {
@@ -29,8 +29,14 @@ class App extends Component {
   };
 
   handleSignupOrLogin = () => {
-    this.setState({ user: userService.getUser() });
+    this.setState({
+      user: userService.getUser(),
+    });
   };
+
+  handleFavoriteScores = (favBeers) => {
+    this.setState({ favBeers })
+  }
 
   async componentDidMount() {
     try {
@@ -87,12 +93,12 @@ class App extends Component {
     );
   };
 
-  handleDeleteFavorite = async (id) => {
+  handleDeleteFavorite = async ({ id, beerId }) => {
     console.log(id)
-    const response = await beerAPI.deleteFavorite(id);
+    await beerAPI.deleteFavorite(id);
     this.setState(
       () => ({
-        favBeers: this.state.favBeers.filter((b) => b.beerId !== id)
+        favBeers: this.state.favBeers.filter((b) => b.beerId !== beerId)
       }),
       () => this.props.history.push("/fridge")
     );
@@ -149,6 +155,7 @@ class App extends Component {
             <FridgePage
               favBeers={this.state.favBeers}
               handleDeleteFavorite={this.handleDeleteFavorite}
+              handleFavoriteScores={this.handleFavoriteScores}
             />
             :
             <Redirect to="/login" />

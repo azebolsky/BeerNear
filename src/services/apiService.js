@@ -35,4 +35,6 @@ export function deleteFavorite(favBeerId) {
   }).then((res) => res.json());
 }
 
-
+export default {
+  allFavorites
+}

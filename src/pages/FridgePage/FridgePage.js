@@ -1,20 +1,29 @@
-import React from "react";
+import React, { Component } from "react";
 import FridgeList from '../../components/FridgeList/FridgeList'
 import "./FridgePage.css";
+import apiService from '../../services/apiService'
 
-const FridgePage = (props) => {
-  return (
-    <div className="Fridge-Page">
-      {props.favBeers.map((beer, idx) => (
-        <FridgeList
-          key={idx}
-          favBeers={props.favBeers}
-          beer={beer}
-          handleDeleteFavorite={props.handleDeleteFavorite}
-        />
-      ))}
-    </div>
-  )
+class FridgePage extends Component {
+
+  async componentDidMount() {
+    const favoriteBeers = await apiService.allFavorites();
+    this.props.handleFavoriteScores(favoriteBeers);
+  }
+
+  render() {
+    return (
+      <div className="Fridge-Page">
+        {this.props.favBeers.map((beer, idx) => (
+          <FridgeList
+            key={idx}
+            favBeers={this.props.favBeers}
+            beer={beer}
+            handleDeleteFavorite={this.props.handleDeleteFavorite}
+          />
+        ))}
+      </div>
+    )
+  }
 }
 
 export default FridgePage;
