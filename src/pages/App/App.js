@@ -6,7 +6,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import userService from "../../services/userService";
 import NavBar from "../../components/NavBar/NavBar";
 import BeerSearchBar from "../../components/BeerSearchBar/BeerSearchBar";
-import { getAllBeers } from "../../services/apiService";
+import apiService, { getAllBeers } from "../../services/apiService";
 import FridgePage from "../FridgePage/FridgePage";
 import * as beerAPI from "../../services/apiService";
 
@@ -94,7 +94,6 @@ class App extends Component {
   };
 
   handleDeleteFavorite = async ({ id, beerId }) => {
-    console.log(id)
     await beerAPI.deleteFavorite(id);
     this.setState(
       () => ({
