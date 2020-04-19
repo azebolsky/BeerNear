@@ -10,6 +10,7 @@ Love beer?  Take a look at a list of hundreds of beers from IPA's to Busch Light
 
 ## Technologies Used: 
 * MongoDB
+* Mongoose
 * Express
 * React
 * NodeJS
