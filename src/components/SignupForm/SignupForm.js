@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "../../services/userService";
+import { Grid, Form, Button } from "semantic-ui-react";
+import './SignupForm.css'
 
 class SignupForm extends Component {
   state = {
@@ -43,42 +45,36 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <div>
-        <header className="header-footer">Sign Up</header>
-        <form onSubmit={this.handleSubmit}>
-          <div className="col-sm-12">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Name"
-              value={this.state.name}
-              name="name"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email"
-              value={this.state.email}
-              name="email"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              value={this.state.password}
-              name="password"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
+      <Grid textAlign="center" style={{ height: "40vh" }} verticalAlign="middle">
+        <Grid.Column style={{ maxWidth: "450" }}>
+          <h2 className="Login-Header">Sign Up</h2>
+          <div className="ui two column centered grid">
+            <Form style={{ width: "800px", fontSize: "25px" }} onSubmit={this.handleSubmit}>
+              <Form.Input
+                type="text"
+                className="form-control"
+                placeholder="Name"
+                value={this.state.name}
+                name="name"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                value={this.state.email}
+                name="email"
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                value={this.state.password}
+                name="password"
+                onChange={this.handleChange}
+              />
+              <Form.Input
                 type="password"
                 className="form-control"
                 placeholder="Confirm Password"
@@ -86,22 +82,22 @@ class SignupForm extends Component {
                 name="passwordConf"
                 onChange={this.handleChange}
               />
-            </div>
+              <div className="Login-Buttons">
+                <Button
+                  fluid
+                  className="ui positive button"
+                  style={{ fontSize: "30px", fontWeight: "bolder" }}
+                  disabled={this.isFormInvalid()}
+                >
+                  Sign Up
+                  </Button>
+                &nbsp;
+                  <Link to="/" className="cancel-link">Cancel</Link>
+              </div>
+            </Form>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button
-                className="btn btn-default"
-                disabled={this.isFormInvalid()}
-              >
-                Sign Up
-              </button>
-              &nbsp;&nbsp;
-              <Link to="/">Cancel</Link>
-            </div>
-          </div>
-        </form>
-      </div>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

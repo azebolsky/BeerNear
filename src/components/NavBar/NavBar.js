@@ -18,6 +18,9 @@ const NavBar = (props) => {
   ) : (
       <React.Fragment>
         <Link to="/login" style={{ color: "rgb(127, 163, 87)", marginRight: "15px" }}>LOG IN</Link>
+        <div style={{ color: "grey" }}>
+          &nbsp; &nbsp;|&nbsp; &nbsp;
+      </div>
         <Link to="/signup" style={{ color: "rgb(127, 163, 87)" }}>SIGN UP</Link>
       </React.Fragment>
     );

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "../../services/userService";
+import { Grid, Form, Button } from "semantic-ui-react";
+import './LoginPage.css'
 
 class LoginPage extends Component {
   state = {
@@ -28,12 +30,12 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="LoginPage">
-        <header className="header-footer">Log In</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
+      <Grid textAlign="center" style={{ height: "40vh" }} verticalAlign="middle">
+        <Grid.Column style={{ maxWidth: "450" }}>
+          <h2 className="Login-Header">Log In Below</h2>
+          <div className="ui two column centered grid">
+            <Form style={{ width: "800px", fontSize: "25px" }} onSubmit={this.handleSubmit}>
+              <Form.Input
                 type="email"
                 className="form-control"
                 placeholder="Email"
@@ -41,11 +43,7 @@ class LoginPage extends Component {
                 name="email"
                 onChange={this.handleChange}
               />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
+              <Form.Input
                 type="password"
                 className="form-control"
                 placeholder="Password"
@@ -53,17 +51,22 @@ class LoginPage extends Component {
                 name="pw"
                 onChange={this.handleChange}
               />
-            </div>
+              <div className="Login-Buttons">
+                <Button
+                  fluid
+                  className="ui positive button"
+                  style={{ fontSize: "30px", fontWeight: "bolder" }}>
+                  Cheers!
+                </Button>
+                &nbsp;
+                <Link to="/" className="cancel-link">
+                  Cancel
+                </Link>
+              </div>
+            </Form>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default">Log In</button>
-              &nbsp;&nbsp;&nbsp;
-              <Link to="/">Cancel</Link>
-            </div>
-          </div>
-        </form>
-      </div>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

@@ -107,28 +107,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Route
-            exact
-            path="/signup"
-            render={({ history }) => (
-              <SignupPage
-                history={history}
-                className="App-nav"
-                handleSignupOrLogin={this.handleSignupOrLogin}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/login"
-            render={({ history }) => (
-              <LoginPage
-                history={history}
-                className="App-nav"
-                handleSignupOrLogin={this.handleSignupOrLogin}
-              />
-            )}
-          />
           <NavBar user={this.state.user} handleLogout={this.handleLogout} />
         </header>
         <Route exact path="/">
@@ -154,6 +132,28 @@ class App extends Component {
             :
             <Redirect to="/login" />
         } />
+        <Route
+          exact
+          path="/signup"
+          render={({ history }) => (
+            <SignupPage
+              history={history}
+              className="App-nav"
+              handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/login"
+          render={({ history }) => (
+            <LoginPage
+              history={history}
+              className="App-nav"
+              handleSignupOrLogin={this.handleSignupOrLogin}
+            />
+          )}
+        />
       </div>
     );
   }
