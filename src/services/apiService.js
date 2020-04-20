@@ -26,7 +26,6 @@ export function addFavorite(beer) {
 }
 
 export function deleteFavorite(favBeerId) {
-  console.log(favBeerId)
   return fetch(BASE_URL + '/favorites/' + favBeerId, {
     method: "DELETE",
     headers: {

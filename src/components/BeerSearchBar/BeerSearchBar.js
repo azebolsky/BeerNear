@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Form, Grid, Segment } from "semantic-ui-react";
+import { Form, Grid, Button } from "semantic-ui-react";
 import BeerSearchResults from "../BeerSearchResults/BeerSearchResults";
-import Pagination from "../Pagination/Pagination";
 import './BeerSearchBar.css';
+import Pagination from "../Pagination/Pagination";
 
 class BeerSearchBar extends Component {
   constructor() {
@@ -30,29 +30,29 @@ class BeerSearchBar extends Component {
     };
     this.setState({
       formData,
-      invalidForm: !this.formRef.current.checkValidity(),
     });
   };
 
   render() {
     return (
-      <div ref={this.wrapper} className="Search-Container">
-        <Grid className="center aligned">
-          <Grid.Column>
-            <Segment className="SearchSegment">
-              <h1>Search Beer Here</h1>
-              <form ref={this.formRef} onSubmit={this.handleSubmit}>
-                <Form.Input>
-                  <input
-                    type="text"
-                    value={this.state.formData.beerName}
-                    name="beerName"
-                    onChange={this.handleChange}
-                  />
-                </Form.Input>
-                <button type="submit">Click to View All Beers or Search</button>
-              </form>
-            </Segment>
+      <div ref={this.wrapper}>
+        <Grid className="center aligned" verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: "450" }}>
+            <h1 className="Search-Header">Search Beer Here</h1>
+            <div className="ui two column centered grid">
+              <Form ref={this.formRef} onSubmit={this.handleSubmit}>
+                <Form.Input
+                  type="text"
+                  value={this.state.formData.beerName}
+                  name="beerName"
+                  onChange={this.handleChange}
+                />
+                <Button
+                  className="ui positive button" type="submit" style={{ marginTop: "10px", fontSize: "25px" }}>
+                  Click to View All Beers or Search
+              </Button>
+              </Form>
+            </div>
           </Grid.Column>
         </Grid>
         <BeerSearchResults

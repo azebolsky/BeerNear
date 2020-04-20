@@ -2,60 +2,60 @@ import React from "react";
 import { Card, Icon, Image, Button } from "semantic-ui-react";
 import Pagination from "../Pagination/Pagination";
 import "./BeerSearchResults.css";
+import userService from "../../services/userService";
 
 const BeerSearchResults = (props) => {
   const beerList = props.searchBeerResults.map((beer, idx) => {
     return (
-      <Card.Group key={props.beers[idx].id}>
-        <Card className="ui centered card" style={{ width: "800px" }}>
-          <Card.Content>
-            <Image
-              floated="left"
-              src={
-                props.beers[idx].labels
-                  ? props.beers[idx].labels.icon
-                  : "https://i.imgur.com/DYjJL5I.png"
-              }
-              wrapped
-              ui={false}
-              alt={beer}
-              width={!props.beers[idx].labels ? "35px" : ""}
-              height={!props.beers[idx].labels ? "70px" : ""}
-            />
-            <Card.Header>{beer}</Card.Header>
-            <Card.Meta>{props.beers[idx].abv}</Card.Meta>
-            <Card.Description>{props.beers[idx].description}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <div>
-              {props.favBeers.length && props.favBeers.every((b) => b.name !== props.beers[idx].name) ?
-                <Button
-                  onClick={() => props.handleFavAddButtonClick({
-                    name: props.beers[idx].name,
-                    abv: props.beers[idx].abv,
-                    beerId: props.beers[idx].id,
-                    icon: props.beers[idx].labels ? props.beers[idx].labels.icon : "https://i.imgur.com/DYjJL5I.png"
-                  })}
-                  icon
-                  labelPosition="left"
-                >
-                  <Icon name="beer" color="green" />
-                  Add to Fridge
+      <Card key={props.beers[idx].id} className="ui centered card">
+        <Card.Content>
+          <Image
+            floated="left"
+            src={
+              props.beers[idx].labels
+                ? props.beers[idx].labels.icon
+                : "https://i.imgur.com/DYjJL5I.png"
+            }
+            wrapped
+            ui={false}
+            alt={beer}
+            width={!props.beers[idx].labels ? "35px" : ""}
+            height={!props.beers[idx].labels ? "70px" : ""}
+          />
+          <Card.Header>{beer}</Card.Header>
+          <Card.Meta>ABV: {props.beers[idx].abv ? `${props.beers[idx].abv}%` : "N/A"}</Card.Meta>
+          <Card.Meta>IBU: {props.beers[idx].ibu ? props.beers[idx].ibu : "N/A"}</Card.Meta>
+          {/* <Card.Meta>Style: {props.beers[idx].style.name ? props.beers[idx].style.name : "N/A"}</Card.Meta> */}
+        </Card.Content>
+        <Card.Content extra>
+          <div>
+            {userService.getUser() ?
+              <Button
+                onClick={() => props.handleFavAddButtonClick({
+                  name: props.beers[idx].name,
+                  abv: props.beers[idx].abv,
+                  beerId: props.beers[idx].id,
+                  icon: props.beers[idx].labels ? props.beers[idx].labels.icon : "https://i.imgur.com/DYjJL5I.png"
+                })}
+                icon
+                labelPosition="left"
+              >
+                <Icon name="beer" color="green" />
+                Add to Fridge
               </Button>
-                :
-                "Already Added to Fridge"
-              }
-            </div>
-          </Card.Content>
-        </Card>
-      </Card.Group>
+              :
+              ""
+            }
+          </div>
+        </Card.Content>
+      </Card>
     );
   });
   return (
-    <div>
+    <Card.Group>
       {beerList}
       <Pagination numberOfPages={props.numberOfPages} />
-    </div>
+    </Card.Group>
   );
 };
 

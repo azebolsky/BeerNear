@@ -1,5 +1,6 @@
 import React from "react";
 import "./Pagination.css";
+import { Button } from "semantic-ui-react";
 
 const Pagination = ({ numberOfPages, currentPage, handlePageClick, searchBeerResults }) => {
   return (
@@ -10,11 +11,11 @@ const Pagination = ({ numberOfPages, currentPage, handlePageClick, searchBeerRes
             {searchBeerResults < 23 ? "" :
               <>
                 <p>{currentPage} of {numberOfPages}</p>
-                <button onClick={handlePageClick}>
+                <Button onClick={handlePageClick}>
                   {currentPage <= numberOfPages
                     ? `Page ${currentPage + 1}`
                     : numberOfPages - (numberOfPages - 1)}
-                </button>
+                </Button>
               </>
             }
           </div>
