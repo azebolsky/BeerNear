@@ -1,26 +1,26 @@
 import React from "react";
-import { Card } from 'semantic-ui-react'
 
 const FridgeList = ({ beer, handleDeleteFavorite }) => {
     return (
-        <div>
-            <Card>
-                {/* <img
-                    src={beer.icon}
+        <div className="card">
+            <div className="content">
+                <img
+                    className="center floated small ui image"
+                    src={beer.icon !== "https://i.imgur.com/DYjJL5I.png" ? beer.icon : "https://i.imgur.com/KJBRJU3.png"}
                     alt="beer"
-                    width={beer.icon === "https://i.imgur.com/DYjJL5I.png" ? "35px" : ""}
-                    height={beer.icon === "https://i.imgur.com/DYjJL5I.png" ? "35px" : ""}
-                /> */}
-                <Card.Content>
-                    <Card.Header>{beer.name}</Card.Header>
-                    <Card.Description>ABV-{beer.abv}%</Card.Description>
-                    <button
-                        onClick={() => handleDeleteFavorite({ id: beer._id, beerId: beer.beerId })}
-                    >
-                        Delete
-                    </button>
-                </Card.Content>
-            </Card>
+                />
+                <div className="header">
+                    {beer.name}
+                </div>
+            </div>
+            <div className="extra content">
+                <button
+                    className="ui inverted red button"
+                    onClick={() => handleDeleteFavorite({ id: beer._id, beerId: beer.beerId })}
+                >
+                    Delete
+                </button>
+            </div>
         </div>
     )
 }

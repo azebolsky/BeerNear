@@ -7,15 +7,15 @@ const Pagination = ({ numberOfPages, currentPage, handlePageClick, searchBeerRes
     <div className="Pagination-Style">
       {!numberOfPages ? "" :
         <>
-          <div>
+          <div className="Pagination-Bottom">
             {searchBeerResults < 23 ? "" :
               <>
                 <p>{currentPage} of {numberOfPages}</p>
-                <Button onClick={handlePageClick}>
-                  {currentPage <= numberOfPages
+                <Button onClick={handlePageClick} icon='right arrow' labelPosition='right' style={{ marginBottom: "10px" }}
+                  content={currentPage <= numberOfPages
                     ? `Page ${currentPage + 1}`
                     : numberOfPages - (numberOfPages - 1)}
-                </Button>
+                />
               </>
             }
           </div>

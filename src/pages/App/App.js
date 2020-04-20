@@ -128,6 +128,7 @@ class App extends Component {
               favBeers={this.state.favBeers}
               handleDeleteFavorite={this.handleDeleteFavorite}
               handleFavoriteScores={this.handleFavoriteScores}
+              user={this.state.user}
             />
             :
             <Redirect to="/login" />
