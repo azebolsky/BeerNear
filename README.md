@@ -29,5 +29,6 @@ Love beer?  Take a look at a list of hundreds of beers from IPA's to Busch Light
 ## Next Steps: 
 * Shorten the amount of beers per page
 * Track a users location and find if any breweries are nearby
+* Make the app more mobile friendly
 * Have a breweries page if the API has the brewery details
 * Try out a different Beer API

@@ -25,7 +25,10 @@ class App extends Component {
 
   handleLogout = () => {
     userService.logout();
-    this.setState({ user: null });
+    this.setState({
+      user: null,
+      favBeers: []
+    });
   };
 
   handleSignupOrLogin = () => {
