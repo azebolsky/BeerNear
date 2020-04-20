@@ -10,6 +10,7 @@ const BeerSearchResults = (props) => {
       <Card key={props.beers[idx].id} className="ui centered card">
         <Card.Content>
           <Image
+            style={{ marginRight: "5px" }}
             floated="left"
             src={
               props.beers[idx].labels
@@ -29,7 +30,7 @@ const BeerSearchResults = (props) => {
         </Card.Content>
         <Card.Content extra>
           <div>
-            {userService.getUser() ?
+            {userService.getUser() && props.favBeers.every((b) => b.name !== props.beers[idx].name) ?
               <Button
                 onClick={() => props.handleFavAddButtonClick({
                   name: props.beers[idx].name,
@@ -40,7 +41,7 @@ const BeerSearchResults = (props) => {
                 icon
                 labelPosition="left"
               >
-                <Icon name="beer" color="green" />
+                <Icon size="large" name="beer" color="green" />
                 Add to Fridge
               </Button>
               :
