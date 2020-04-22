@@ -17,7 +17,7 @@ const NavBar = (props) => {
     </React.Fragment>
   ) : (
       <React.Fragment>
-        <Link to="/login" style={{ color: "rgb(127, 163, 87)", marginRight: "15px" }}>LOG IN</Link>
+        <Link to="/login" style={{ color: "rgb(127, 163, 87)" }}>LOG IN</Link>
         <div style={{ color: "grey" }}>
           &nbsp; &nbsp;|&nbsp; &nbsp;
       </div>
@@ -26,7 +26,8 @@ const NavBar = (props) => {
     );
   return (
     <div className="Navbar">
-      <div className="Menu Menu-1">
+      <br />
+      <div className="Menu-1">
         <NavLink exact to="/" style={{ color: "rgb(127, 163, 87)", textShadow: "1px 3px darkGreen" }}>
           BeerNear
           </NavLink>
@@ -34,7 +35,7 @@ const NavBar = (props) => {
       <div className="logo">
         <img src="https://i.imgur.com/292qkwS.png" alt="logo" />
       </div>
-      <div className="Menu Menu-2">
+      <div className="Menu-2">
         {nav}
       </div>
     </div>

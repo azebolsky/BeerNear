@@ -48,7 +48,7 @@ class BeerSearchBar extends Component {
                   onChange={this.handleChange}
                 />
                 <Button
-                  className="ui positive button" type="submit" style={{ marginBottom: "20px", fontSize: "25px" }}>
+                  className="ui positive button" type="submit" style={{ marginBottom: "20px", fontSize: "15px" }}>
                   Click to View All Beers or Search
               </Button>
               </Form>
