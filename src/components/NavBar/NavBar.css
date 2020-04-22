@@ -18,7 +18,7 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 30px;
-  font-size: 60px;
+  font-size: 30px;
   font-family: 'Raleway', sans-serif;
   text-decoration: none;  
 }
@@ -27,7 +27,7 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
-  font-size: 30px;
+  font-size: 15px;
   text-decoration: none;  
 }
 
@@ -35,7 +35,7 @@
   display: flex;
   flex: 0 1 20vw;
   text-align: center;
-  max-width: 1000px;
+  max-width: 500px;
 }
 
 .logo img {

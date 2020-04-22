@@ -4,6 +4,14 @@ import Pagination from "../Pagination/Pagination";
 import "./BeerSearchResults.css";
 import userService from "../../services/userService";
 
+{/* <div class="ui two column centered grid">
+  <div class="column">1</div>
+  <div class="four column centered row">
+    <div class="column">2</div>
+    <div class="column">3</div>
+  </div>
+</div> */}
+
 const BeerSearchResults = (props) => {
   const beerList = props.searchBeerResults.map((beer, idx) => {
     return (
@@ -53,10 +61,12 @@ const BeerSearchResults = (props) => {
     );
   });
   return (
-    <Card.Group>
-      {beerList}
-      <Pagination numberOfPages={props.numberOfPages} />
-    </Card.Group>
+    <div className="BeerListContainer">
+      <Card.Group>
+        {beerList}
+        <Pagination numberOfPages={props.numberOfPages} />
+      </Card.Group>
+    </div>
   );
 };
 
