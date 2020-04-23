@@ -34,7 +34,7 @@ class LoginPage extends Component {
         <Grid.Column style={{ maxWidth: "450" }}>
           <h2 className="Login-Header">Log In Below</h2>
           <div className="ui two column centered grid">
-            <Form style={{ width: "800px", fontSize: "25px" }} onSubmit={this.handleSubmit}>
+            <Form style={{ width: "400px", fontSize: "15px" }} onSubmit={this.handleSubmit}>
               <Form.Input
                 type="email"
                 className="form-control"
@@ -55,7 +55,7 @@ class LoginPage extends Component {
                 <Button
                   fluid
                   className="ui positive button"
-                  style={{ fontSize: "30px", fontWeight: "bolder" }}>
+                  style={{ fontSize: "15px", fontWeight: "bolder" }}>
                   Cheers!
                 </Button>
                 &nbsp;

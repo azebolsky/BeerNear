@@ -16,7 +16,7 @@ class FridgePage extends Component {
         <div style={{ marginBottom: "20px" }}>
           <h1 className="Fridge-Header">{this.props.favBeers.length ? "Grab a cold one from the fridge!" : "Oh no, the fridge is empty"}</h1>
         </div>
-        <div className="ui cards">
+        <div className="FridgeListContainer">
           {this.props.favBeers.map((beer, idx) => (
             <FridgeList
               key={idx}

@@ -1,14 +1,9 @@
-.Fridge-Page {
-  background: url("https://i.imgur.com/qCtNL8a.jpg") no-repeat;
-  height: 100vh;
-  /* display: flex;
-  justify-content: center;
-  align-self: center; */
-  background-size: 100% 95%;
-}
-
 .Fridge-Header {
   text-align: center;
   color: goldenrod;
-  font-size: 50px;
+  font-size: 30px;
+}
+
+.FridgeListContainer {
+  margin: 0 10%;
 }

@@ -45,6 +45,7 @@ class BeerSearchBar extends Component {
                   type="text"
                   value={this.state.formData.beerName}
                   name="beerName"
+                  placeholder="Search"
                   onChange={this.handleChange}
                 />
                 <Button

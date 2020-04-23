@@ -49,7 +49,7 @@ class SignupForm extends Component {
         <Grid.Column style={{ maxWidth: "450" }}>
           <h2 className="Login-Header">Sign Up</h2>
           <div className="ui two column centered grid">
-            <Form style={{ width: "800px", fontSize: "25px" }} onSubmit={this.handleSubmit}>
+            <Form style={{ width: "400px", fontSize: "15px" }} onSubmit={this.handleSubmit}>
               <Form.Input
                 type="text"
                 className="form-control"
@@ -86,7 +86,7 @@ class SignupForm extends Component {
                 <Button
                   fluid
                   className="ui positive button"
-                  style={{ fontSize: "30px", fontWeight: "bolder" }}
+                  style={{ fontSize: "15px", fontWeight: "bolder" }}
                   disabled={this.isFormInvalid()}
                 >
                   Sign Up
