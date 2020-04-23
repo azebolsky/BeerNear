@@ -19,14 +19,14 @@
   margin-bottom: 40px;
 }
 
-.logo {
+/* .logo {
   display: flex;
   align-self: center;
   justify-content: center;
-  height: 30%;
-}
+  height: 50%;
+} */
 
 .logo img {
   max-width: 100%;
-  width: 100%;
+  height: auto;
 }
