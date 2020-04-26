@@ -14,6 +14,10 @@ const NavBar = (props) => {
       <Link to="" onClick={props.handleLogout} style={{ color: "rgb(127, 163, 87)" }}>
         LOG OUT
       </Link>
+      <div style={{ color: "grey" }}>
+        &nbsp; &nbsp;|&nbsp; &nbsp;
+      </div>
+      <Link to="/" style={{ color: "rgb(127, 163, 87)" }}>Home</Link>
     </React.Fragment>
   ) : (
       <React.Fragment>
