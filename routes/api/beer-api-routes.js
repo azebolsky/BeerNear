@@ -13,8 +13,6 @@ router.get("/", function (req, res) {
   );
 });
 
-// router.get("/", function(req))
-
 router.post("/fridge", function (req, res) {
   const beerId = req.query.id;
   request(

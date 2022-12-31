@@ -27,7 +27,7 @@ class App extends Component {
     userService.logout();
     this.setState({
       user: null,
-      favBeers: []
+      favBeers: [],
     });
   };
 
@@ -38,8 +38,8 @@ class App extends Component {
   };
 
   handleFavoriteScores = (favBeers) => {
-    this.setState({ favBeers })
-  }
+    this.setState({ favBeers });
+  };
 
   async componentDidMount() {
     try {
@@ -55,12 +55,14 @@ class App extends Component {
     }
   }
 
-
   getBeerResults = async (beerName) => {
     try {
       let beerArray = [];
-      await this.state.beers.filter((beer) => (
-        beer.name.toLowerCase().includes(beerName.toLowerCase())) ? beerArray.push(beer.name) : "");
+      await this.state.beers.filter((beer) =>
+        beer.name.toLowerCase().includes(beerName.toLowerCase())
+          ? beerArray.push(beer.name)
+          : ""
+      );
       this.setState({ searchBeerResults: [...beerArray] });
     } catch (error) {
       console.log(error);
@@ -76,9 +78,7 @@ class App extends Component {
       numberOfPages,
     });
     let beerArray = [];
-    this.state.beers.map((beer) =>
-      beerArray.push(beer.name)
-    );
+    this.state.beers.map((beer) => beerArray.push(beer.name));
     this.setState({
       searchBeerResults: beerArray,
     });
@@ -87,7 +87,7 @@ class App extends Component {
 
   handleFavAddButtonClick = async (newBeerData) => {
     const response = await beerAPI.addFavorite(newBeerData);
-    const favBeersCopy = [...this.state.favBeers, response]
+    const favBeersCopy = [...this.state.favBeers, response];
     this.setState(
       () => ({
         favBeers: favBeersCopy,
@@ -100,11 +100,11 @@ class App extends Component {
     await beerAPI.deleteFavorite(id);
     this.setState(
       () => ({
-        favBeers: this.state.favBeers.filter((b) => b.beerId !== beerId)
+        favBeers: this.state.favBeers.filter((b) => b.beerId !== beerId),
       }),
       () => this.props.history.push("/fridge")
     );
-  }
+  };
 
   render() {
     return (
@@ -125,17 +125,22 @@ class App extends Component {
             favBeers={this.state.favBeers}
           />
         </Route>
-        <Route exact path="/fridge" render={() =>
-          userService.getUser() ?
-            <FridgePage
-              favBeers={this.state.favBeers}
-              handleDeleteFavorite={this.handleDeleteFavorite}
-              handleFavoriteScores={this.handleFavoriteScores}
-              user={this.state.user}
-            />
-            :
-            <Redirect to="/login" />
-        } />
+        <Route
+          exact
+          path="/fridge"
+          render={() =>
+            userService.getUser() ? (
+              <FridgePage
+                favBeers={this.state.favBeers}
+                handleDeleteFavorite={this.handleDeleteFavorite}
+                handleFavoriteScores={this.handleFavoriteScores}
+                user={this.state.user}
+              />
+            ) : (
+              <Redirect to="/login" />
+            )
+          }
+        />
         <Route
           exact
           path="/signup"
